@@ -1,0 +1,20 @@
+input[type=text].error-message {
+    background-color: red;
+    color: #4e0316!important;
+    display: inline-block;
+
+  }
+  input[type=password].error-message {
+    background-color: red;
+    color: #4e0316!important;
+    display: inline-block;
+
+  }
+  
+  input[type=text].succes-message {
+    background-color: #28a745;
+    color: #045016!important;
+    display: inline-block;
+
+  }
+  
