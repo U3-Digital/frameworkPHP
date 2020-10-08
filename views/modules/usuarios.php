@@ -9,8 +9,8 @@
 
 
 <div class="d-flex " id="wrapper">
-<?php 
-include "views\modules\menuBar.php";
+<?php
+include "views/modules/menuBar.php";
 $editarPerfil=new Perfil();
 $editarPerfil->ctrAgregarPerfil();
 $editarPerfil->ctrEliminarCliente();
@@ -32,10 +32,10 @@ $editarPerfil->ctrEliminarCliente();
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-	  
+
 	<div class="container">
 		<br>
-	
+
 		<div class="row">
 			<div class="col-md-6">
 			<div class="row">
@@ -86,7 +86,7 @@ $editarPerfil->ctrEliminarCliente();
 				<div class="col-md-4">
 				<select class="custom-select" id="inputGroupSelect01" name="inputGroupSelect01" required>
 					<option disabled selected>Seleccionar</option>
-					<?php 
+					<?php
 						$editarPerfil=new Perfil();
 						$editarPerfil->ctrListarRoles();
 					?>
@@ -94,12 +94,12 @@ $editarPerfil->ctrEliminarCliente();
 				</div>
 			</div>
 			<br>
-	
+
 			</div>
 			<div class="col-md-6">
 				<div class="row">
 					<div class="profile-img">
-						<img src="views\img\user.png" alt="" id="imgFotoPerfilNuevo" name="imgFotoPerfilNuevo" style="max-width:250px;max-height:250px; "/>
+						<img src="views/img/user.png" alt="" id="imgFotoPerfilNuevo" name="imgFotoPerfilNuevo" style="max-width:250px;max-height:250px; "/>
 						<div class="file btn btn-lg btn-primary pointer">
 							Cambiar Foto
 							<input type="file" class="" onchange="mostarImagen(event, 'imgFotoPerfilNuevo')" id="subirFotoPerfilNuevoUsuario" name="subirFotoPerfilNuevoUsuario" required/>
@@ -116,7 +116,7 @@ $editarPerfil->ctrEliminarCliente();
 					<button type="submit" class="btn btn-primary">Agregar Usuario</button>
 				</div>
 			</div>
-		
+
 
 	</div>
 	</form>
@@ -138,17 +138,17 @@ $editarPerfil->ctrEliminarCliente();
 							<table id="example" class="table table-bordered table-striped">
 								<thead>
 								<tr>
-									
+
 									<th>Usuario</th>
 									<th>Nombre</th>
 									<th>Email</th>
 									<th>Rol</th>
 									<th style="width:2.5em;">Acciones</th>
-								
+
 								</tr>
 								</thead>
 									<tbody>
-									<?php 
+									<?php
 										$listarUsuarios=new Perfil();
 										$listarUsuarios->ctrListarUsuarios();
 									?>
@@ -157,7 +157,7 @@ $editarPerfil->ctrEliminarCliente();
 								</table>
 						</div>
 					</div>
-				</div> 
+				</div>
             </div>
         </div>
   </div><!-- tab ver todos -->
@@ -193,5 +193,5 @@ $editarPerfil->ctrEliminarCliente();
 				</div>
 			</div>
 		</div>
-<script src="views\js\usuarios.js"></script>
+<script src="views/js/usuarios.js"></script>
 

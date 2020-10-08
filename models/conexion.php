@@ -3,14 +3,30 @@
 class Conexion{
 
 	public static function conectar(){
+		// conexion local
+		$servername = "dineraliahm.com";
+		$username = "dinerali_admin";
+		$password = ";]oX3Gi7Ld7Fj1";
+		$dbname = "dinerali_sistema";
 
-		//		 $link = new PDO("mysql:host=dineralia.net;dbname=dineralia","admin","Fy$8r@soR4cy");
-		 $link = new PDO("mysql:host=dineraliahm.com;dbname=dinerali_sistema","dinerali_admin",";]oX3Gi7Ld7Fj1");
-		//$link = new PDO("mysql:host=localhost;dbname=sistema","root","123456");
-	
+		//conexion Server
+		// $servername = "mysql1007.mochahost.com";
+		// $username = "rickurbi_belcam";
+		// $password = "8gqMy;BQz@Om";
+		// $dbname = "rickurbi_belcam";
 
+		try {
+		    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+		    // set the PDO error mode to exception
+		    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		     echo '<script>alert("Connected successfully");</script>';
+		    }
+		catch(PDOException $e)
+		    {
+		     echo '<script>alert("Connection failed: '.$e->getMessage().'");</script>';
 
-		return $link;
+		    }
+		return $conn;
 
 	}
 

@@ -10,7 +10,7 @@ $login -> ctrIngreso();
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="views\img\u3 grande.png" class="d-inline-block align-top" id="icon" alt="Empresa Logo" style="height:150px; width:150px;"/>
+      <img src="views/img/u3 grande.png" class="d-inline-block align-top" id="icon" alt="Empresa Logo" style="height:150px; width:150px;"/>
     </div>
 
     <!-- Login Form -->
