@@ -9,7 +9,7 @@
 
 
 <div class="d-flex " id="wrapper">
-<?php
+<?php 
 include "views/modules/menuBar.php";
 $editarPerfil=new Perfil();
 $editarPerfil->ctrAgregarPerfil();
@@ -17,7 +17,7 @@ $editarPerfil->ctrEliminarCliente();
 ?>
   <div class="container-fluid">
   <br />
-  <form action="" method="post" enctype="multipart/form-data">
+  <form action="" method="post" enctype="multipart/form-data" id="nuevoUsuario">
   		<div class="row">
 			<div class="col-md-12 col-xs-12 text-center"><h2>Usuarios</h2></div>
 		</div>
@@ -32,10 +32,10 @@ $editarPerfil->ctrEliminarCliente();
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-	<div class="container">
+	  
+	<div class="container" id="contenedorUsuarios">
 		<br>
-
+	
 		<div class="row">
 			<div class="col-md-6">
 			<div class="row">
@@ -43,7 +43,7 @@ $editarPerfil->ctrEliminarCliente();
 					<label>User Id</label>
 				</div>
 				<div class="col-md-6">
-					<input type="text" class="text" id="ctNuevoUsuario" name="ctNuevoUsuario" value="" required>
+					<input type="text" class="text " id="ctNuevoUsuario" name="ctNuevoUsuario" value="" required>
 				</div>
 			</div>
 			<div class="row">
@@ -51,7 +51,7 @@ $editarPerfil->ctrEliminarCliente();
 					<label>Contraseña</label>
 				</div>
 				<div class="col-md-6">
-					<input type="password" class="text" id="ctNuevoUsuarioContraseña" name="ctNuevoUsuarioContraseña" value="" required>
+					<input type="password" class="text " id="ctNuevoUsuarioContraseña" name="ctNuevoUsuarioContraseña" value="" required>
 				</div>
 			</div>
 
@@ -60,7 +60,7 @@ $editarPerfil->ctrEliminarCliente();
 					<label>Confirmar Contraseña</label>
 				</div>
 				<div class="col-md-6">
-					<input type="password" class="text" id="ctNuevoUsuarioConfirmarContraseña" name="ctNuevoUsuarioConfirmarContraseña" value="" onblur="revisarContraseña()" required>
+					<input type="password" class="text " id="ctNuevoUsuarioConfirmarContraseña" name="ctNuevoUsuarioConfirmarContraseña" value="" onblur="revisarContrasena()" required>
 				</div>
 			</div>
 			<div class="row">
@@ -86,7 +86,7 @@ $editarPerfil->ctrEliminarCliente();
 				<div class="col-md-4">
 				<select class="custom-select" id="inputGroupSelect01" name="inputGroupSelect01" required>
 					<option disabled selected>Seleccionar</option>
-					<?php
+					<?php 
 						$editarPerfil=new Perfil();
 						$editarPerfil->ctrListarRoles();
 					?>
@@ -94,7 +94,7 @@ $editarPerfil->ctrEliminarCliente();
 				</div>
 			</div>
 			<br>
-
+	
 			</div>
 			<div class="col-md-6">
 				<div class="row">
@@ -113,10 +113,10 @@ $editarPerfil->ctrEliminarCliente();
 				<div class="col-md-6 col-sm-12 float-left"></div>
 				<div class="col-md-6 col-sm-12">
 					<a type="button" class="btn btn-danger" href="index.php?action=inicio">Cancelar</a>
-					<button type="submit" class="btn btn-primary">Agregar Usuario</button>
+					<button type="submit" id="enviarFormularioNuevoUsuario" class="btn btn-primary">Agregar Usuario</button>
 				</div>
 			</div>
-
+		
 
 	</div>
 	</form>
@@ -138,17 +138,17 @@ $editarPerfil->ctrEliminarCliente();
 							<table id="example" class="table table-bordered table-striped">
 								<thead>
 								<tr>
-
+									
 									<th>Usuario</th>
 									<th>Nombre</th>
 									<th>Email</th>
 									<th>Rol</th>
 									<th style="width:2.5em;">Acciones</th>
-
+								
 								</tr>
 								</thead>
 									<tbody>
-									<?php
+									<?php 
 										$listarUsuarios=new Perfil();
 										$listarUsuarios->ctrListarUsuarios();
 									?>
@@ -157,7 +157,7 @@ $editarPerfil->ctrEliminarCliente();
 								</table>
 						</div>
 					</div>
-				</div>
+				</div> 
             </div>
         </div>
   </div><!-- tab ver todos -->

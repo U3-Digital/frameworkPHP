@@ -18,15 +18,17 @@ document.getElementById('ctNuevoUsuario').addEventListener('change', function() 
         if (this.status === 200) {
             let caja = document.getElementById('ctNuevoUsuario');
             const mensaje = document.createElement('div');
+            const btnEnviar = document.getElementById('enviarFormularioNuevoUsuario');
+
             mensaje.appendChild(document.createTextNode(mensaje));
             if (caja.value != "") {
-
-                var usuario = JSON.parse(this.responseText);
+                var usuario = JSON.parse(this.responseText, true);
                 if (usuario.length < 1) {
                     caja.classList = "";
-                    caja.classList = "text succes-message";
-
+                    caja.classList = "text camposRojos";
+                    btnEnviar.disabled = false;
                 } else {
+                   
                     caja.classList = "";
                     caja.classList = "text error-message";
                     const divMensaje = document.querySelector('.mensajes');
@@ -34,14 +36,10 @@ document.getElementById('ctNuevoUsuario').addEventListener('change', function() 
                     mensaje.innerText = "Nombre de Usuario Existente";
                     divMensaje.appendChild(mensaje);
                     setTimeout(() => {
-                        document.querySelector('.mensajes div').remove();
+                        document.querySelector('.mensajes').remove();
                     }, 3000);
-
-                }
-            } else {
-                caja.classList = "";
-                caja.classList = "text";
-            }
+                } //else
+            } //caja!=nada
         } //todo correcto
     };
     xhr.send(datos);
@@ -52,9 +50,11 @@ document.getElementById('ctNuevoUsuario').addEventListener('change', function() 
 REVISAR SI EL LAS CONTRASEÑAS COINCIDEN
 =============================================*/
 
-function revisarContraseña() {
+function revisarContrasena() {
     let contraseña = document.getElementById('ctNuevoUsuarioContraseña');
     let contraseñaConfirmar = document.getElementById('ctNuevoUsuarioConfirmarContraseña');
+    const btnEnviar = document.getElementById('enviarFormularioNuevoUsuario');
+
 
     const mensaje = document.createElement('div');
     mensaje.appendChild(document.createTextNode(mensaje));
@@ -62,9 +62,11 @@ function revisarContraseña() {
     if (contraseña.value == contraseñaConfirmar.value) {
         contraseñaConfirmar.classList = "";
         contraseñaConfirmar.classList = "text";
+         btnEnviar.disabled = false;
     } else {
         contraseñaConfirmar.classList = "";
         contraseñaConfirmar.classList = "text error-message";
+        //btnEnviar.disabled = true;
 
         const divMensaje = document.querySelector('.mensajes');
         mensaje.classList = "alert alert-danger text-center";
@@ -86,9 +88,9 @@ function revisarContraseña() {
 
 const usuario = document.querySelectorAll('.custom-control-label');
 usuario.forEach(etSwitch => {
-    etSwitch.addEventListener('click',valor=>{
-        const estado=valor.target.previousElementSibling.checked;
-        const usuario=valor.target.htmlFor+"-"+estado;
+    etSwitch.addEventListener('click', valor => {
+        const estado = valor.target.previousElementSibling.checked;
+        const usuario = valor.target.htmlFor + "-" + estado;
         //idusuario-estado
         //ilse-false
         var datos = new FormData();
@@ -97,13 +99,13 @@ usuario.forEach(etSwitch => {
         xhr.open('POST', 'views/modules/ajax/ajaxUsuarios.php', true);
         xhr.onload = function() {
             if (this.status === 200) {
-               
+
             } //todo correcto
         };
         xhr.send(datos);
 
-    });//addEventListenerClick
-});//ForEach
+    }); //addEventListenerClick
+}); //ForEach
 
 
 /*=============================================
@@ -118,7 +120,28 @@ $(document).ready(function() {
         var data = $tr.children("td").map(function() {
             return $(this).text();
         }).get();
-        $('#delete_id').val(data[0]);//asigna el Id
+        $('#delete_id').val(data[0]); //asigna el Id
     });
 });
 
+/*=============================================
+REVISAR SI EXISTE ALGUN CAMPO EN ROJO
+=============================================*/
+const formulario = document.getElementById('nuevoUsuario');
+formulario.addEventListener('submit', accion => {
+    accion.preventDefault();
+
+    const contenedor = formulario.querySelectorAll('.error-message');
+    let contador = 0;
+    contenedor.forEach(element => {
+        contador += 1;
+    });
+    const btnEnviar = document.getElementById('enviarFormularioNuevoUsuario');
+    //console.log(contador);
+    if (contador > 0) {
+        btnEnviar.disabled = true;
+    } else {
+        btnEnviar.disabled = false;
+        formulario.submit();
+    }
+});

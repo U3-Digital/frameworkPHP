@@ -77,6 +77,32 @@ class MdlPerfil{
         
     }
 
+    public static function mdlVerificarEmail($email,$tabla){
+        // echo "<script>console.log('".$datosModel["usuario"]."');</script>";
+        // echo "<script>console.log('".$datosModel["password"]."');</script>";
+        // echo "<script>console.log('".$datosModel["nombre"]."');</script>";
+        // echo "<script>console.log('".$datosModel["email"]."');</script>";
+        // echo "<script>console.log('".$datosModel["foto"]."');</script>";
+        // echo "<script>console.log('".$datosModel["rol"]."');</script>";
+
+        $stmtVerificarContrasena = Conexion::conectar()->prepare("SELECT COUNT(email) FROM $tabla WHERE email=:email");
+        $stmtVerificarContrasena -> bindParam(":email",$email );
+        $stmtVerificarContrasena -> execute();
+        return $stmtVerificarContrasena->fetch();
+    
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
     
     static public function mdlLeerContraseña($datosModel, $tabla)
 	{

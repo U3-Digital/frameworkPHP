@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 class Perfil{
     
     public static function ctrEditarPerfil(){
@@ -154,76 +156,97 @@ class Perfil{
             
     public static function  ctrAgregarPerfil(){
 
+         if(isset($_POST["ctNuevoUsuarioEmail"])){
+         $email=$_POST["ctNuevoUsuarioEmail"];
+         $respuestaContrasena = MdlPerfil::mdlVerificarEmail($email, "usuarios");
 
-        if(isset($_POST["ctNuevoUsuario"])){
-    
+
+         $avanza=($respuestaContrasena[0]==0)?'true':'false';
+ 
+
+         if($avanza=='true'){
     
                 ///////////////////FOTO DE PERFIL ///////////////////////////////////////
-                  $url="views/uploads/usuariosPerfil";
+                $url="views/uploads/usuariosPerfil";
       
-                  list($ancho, $alto) = getimagesize($_FILES["subirFotoPerfilNuevoUsuario"]["tmp_name"]);
-                          $nuevoAncho = 1000;
-                          $nuevoAlto = 700;
-                          $nombrePerfil=$_POST["ctNuevoUsuario"];
-      
-                          if($_FILES["subirFotoPerfilNuevoUsuario"]["type"] == "image/jpeg"){
-      
-                              $ruta = "".$url."/".$nombrePerfil.".jpg";
-      
-                              $origen = imagecreatefromjpeg($_FILES["subirFotoPerfilNuevoUsuario"]["tmp_name"]);
-      
-                              $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-      
-                              imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-      
-                              imagejpeg($destino, $ruta);
+                list($ancho, $alto) = getimagesize($_FILES["subirFotoPerfilNuevoUsuario"]["tmp_name"]);
+                        $nuevoAncho = 1000;
+                        $nuevoAlto = 700;
+                        $nombrePerfil=$_POST["ctNuevoUsuario"];
     
-                          }
-      
-                          if($_FILES["subirFotoPerfilNuevoUsuario"]["type"] == "image/png"){
-      
-                              $ruta = "".$url."/".$nombrePerfil.".jpg";
+                        if($_FILES["subirFotoPerfilNuevoUsuario"]["type"] == "image/jpeg"){
     
-                              $origen = imagecreatefrompng($_FILES["subirFotoPerfilNuevoUsuario"]["tmp_name"]);
-      
-                              $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-      
-                              imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-      
-                              imagepng($destino, $ruta);
-                          }
-                    
-                          $rutaImagen=($ruta=="")?$_SESSION['foto']:$ruta;
+                            $ruta = "".$url."/".$nombrePerfil.".jpg";
+    
+                            $origen = imagecreatefromjpeg($_FILES["subirFotoPerfilNuevoUsuario"]["tmp_name"]);
+    
+                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+    
+                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+    
+                            imagejpeg($destino, $ruta);
+  
+                        }
+    
+                        if($_FILES["subirFotoPerfilNuevoUsuario"]["type"] == "image/png"){
+    
+                            $ruta = "".$url."/".$nombrePerfil.".jpg";
+  
+                            $origen = imagecreatefrompng($_FILES["subirFotoPerfilNuevoUsuario"]["tmp_name"]);
+    
+                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+    
+                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+    
+                            imagepng($destino, $ruta);
+                        }
+                  
+                        $rutaImagen=($ruta=="")?$_SESSION['foto']:$ruta;
 
-                          $encriptar = crypt($_POST["ctNuevoUsuarioContraseña"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-                 $datosController = array(   "usuario"=>$_POST["ctNuevoUsuario"],
-                                             "password"=>$encriptar,
-                                              "nombre"=>$_POST["ctNuevoUsuarioNombre"],
-                                              "email"=>$_POST["ctNuevoUsuarioEmail"],
-                                              "rol"=>$_POST["inputGroupSelect01"],
-                                              "foto"=>$rutaImagen
-                                         );
-              
-                               
-      
-                   $respuesta = MdlPerfil::mdlAgregarPerfil($datosController, "usuarios");
-          
-                   if($respuesta=="succes"){
-      
-                       echo "<script>Swal.fire({
-                           icon: 'success',
-                           title: 'Buen trabajo',
-                           text: 'El Usuario ha sido Agregado',
-                           footer: ''
-                          }).then(function() {
-                            window.location = ' index.php?action=inicio';										
-                        });</script>";
-                         
-      
-                       //header("location:index.php?action=inicio");
-      
-                   }
-            }
+                        $encriptar = crypt($_POST["ctNuevoUsuarioContraseña"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+               $datosController = array(   "usuario"=>$_POST["ctNuevoUsuario"],
+                                           "password"=>$encriptar,
+                                            "nombre"=>$_POST["ctNuevoUsuarioNombre"],
+                                            "email"=>$_POST["ctNuevoUsuarioEmail"],
+                                            "rol"=>$_POST["inputGroupSelect01"],
+                                            "foto"=>$rutaImagen
+                                       );
+            
+                             
+    
+                 $respuesta = MdlPerfil::mdlAgregarPerfil($datosController, "usuarios");
+        
+                 if($respuesta=="succes"){
+    
+                     echo "<script>Swal.fire({
+                         icon: 'success',
+                         title: 'Buen trabajo',
+                         text: 'El Usuario ha sido Agregado',
+                         footer: ''
+                        }).then(function() {
+                                                                  
+                      });</script>";
+                       
+    
+                     //header("location:index.php?action=inicio");
+    
+                 }//succes
+         }//avanza true
+         if($avanza=='false'){
+            echo "<script>Swal.fire({
+                icon: 'warning',
+                title: 'Precaucion',
+                text: 'Ese correo pertenece a otra cuenta.',
+                footer: ''
+               }).then(function() {
+                                                         
+             });</script>";
+             return;
+         }
+
+         }//issetNuevoUsuario
+
+
         }//ctrEditarPerfil
 
         public static function ctrListarUsuarios()
@@ -270,6 +293,7 @@ class Perfil{
        
         public static function  ctrActualizarEstadoUsuario($valor)
         {
+            //echo"<script>console.log('".$valor."');</script>";
     
             $tabla = "usuarios";
     

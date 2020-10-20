@@ -93,7 +93,7 @@ $respuesta = MdlPerfil::mdlCargarPerfil("usuarios");
 								<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 								<div class="row">
 								<div class="col-md-12">
-									<form action="" method="post">
+									<form action="" method="post" id="enviarFormularioCambiarContraseña">
 									
 											<div class="row">
 												<div class="col-md-12">
@@ -119,7 +119,7 @@ $respuesta = MdlPerfil::mdlCargarPerfil("usuarios");
 															<label>Nueva Contraseña</label>
 														</div>
 														<div class="col-md-6">
-															<input type="password" class="cajasEditar" id="ctNuevaNuevaContraseña" name="ctNuevaNuevaContraseña" value="" required>
+															<input type="password" class="cajasEditar" id="ctNuevaNuevaContraseña" name="ctNuevaNuevaContraseña"onblur="confirmarContrsena()" value="" required>
 														</div>
 													</div>
 													<br>
@@ -127,7 +127,7 @@ $respuesta = MdlPerfil::mdlCargarPerfil("usuarios");
 															<div class="col-md-6 col-sm-12"></div>
 															<div class="col-md-6 col-sm-12">
 																<a type="button" class="btn btn-danger" href="index.php?action=inicio">Cancelar</a>
-																<button type="submit" class="btn btn-primary">Cambiar</button>
+																<button type="submit" class="btn btn-primary" id="enviarCambiarContraseña">Cambiar</button>
 															</div>
 														</div>
 													</div>
@@ -135,7 +135,12 @@ $respuesta = MdlPerfil::mdlCargarPerfil("usuarios");
 											</form>
 									</div>
 								</div>
-
+								<br>
+								<div class="row">
+									<div class="col-md-2"></div>
+									<div class="col-md-8"><div id="" class="mensajes"></div></div>
+									<div class="col-md-2"></div>
+								</div>
 								</div><!-- tab cambiar contrase;a usuario -->
 
 								

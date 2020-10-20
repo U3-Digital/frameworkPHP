@@ -27,7 +27,7 @@ class EnlacesModels{
 			// echo "<script>console.log('".$module."')</script>";
 		}
 		else if($enlaces == "usuarios"){
-			$module = "views\modules\usuarios.php";
+			$module = "views/modules/usuarios.php";
 			//echo "<script>console.log('".$enlaces."')</script>";
 		}
 		else if($enlaces == "registrar"){
@@ -54,7 +54,7 @@ class EnlacesModels{
 		
 
 		else{
-			$module = "views\modules\login.php";
+			$module = "views/modules/login.php";
 		}
 
 		return $module;
